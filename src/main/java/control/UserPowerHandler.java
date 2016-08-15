@@ -5,18 +5,26 @@ import commands.ICommand;
 import control.utils.MapPersistence;
 import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
-import events.IOnBotStartingEvent;
 
 import java.io.File;
 import java.util.HashMap;
 
 public class UserPowerHandler implements IOnBotShutdownEvent, IOnBotInitializedEvent {
+    private static final String SAVE_PATH = "data/powerLevel.data";
     private static HashMap<String, Integer> powerLevel = new HashMap<>();
     private static UserPowerHandler instance;
-    private static final String SAVE_PATH = "data/powerLevel.data";
     private static TS3Api tsAPI = null;
 
-    private UserPowerHandler() {}
+    private UserPowerHandler() {
+    }
+
+    public static UserPowerHandler getInstance() {
+        if (instance == null) {
+            instance = new UserPowerHandler();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onBotShutdown(TS3Api api, int shutdownCode) {
@@ -38,11 +46,11 @@ public class UserPowerHandler implements IOnBotShutdownEvent, IOnBotInitializedE
     public int getUserPowerLevelFromRank(String UID) {
         int powerLevel = 0;
 
-        if(tsAPI != null) {
+        if (tsAPI != null) {
             int[] groups = tsAPI.getClientByUId(UID).getServerGroups();
             for (int i = 0; i < groups.length; i++) {
                 if (groups[i] == 10) {
-                    if(powerLevel < 75) {
+                    if (powerLevel < 75) {
                         powerLevel = 75;
                     }
                 } else if (groups[i] == 6) {
@@ -54,19 +62,11 @@ public class UserPowerHandler implements IOnBotShutdownEvent, IOnBotInitializedE
         return powerLevel;
     }
 
-    public static UserPowerHandler getInstance() {
-        if(instance == null) {
-            instance = new UserPowerHandler();
-        }
-
-        return instance;
-    }
-
     @Override
     public void onBotInitialized(TS3Api api) {
         tsAPI = api;
         File dataFile = new File(SAVE_PATH);
-        if(dataFile.exists()) {
+        if (dataFile.exists()) {
             powerLevel.putAll(MapPersistence.readStringIntegerMap(dataFile));
         }
     }

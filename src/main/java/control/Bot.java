@@ -14,10 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Bot {
+    public static Logger logger = Logger.getGlobal();
     private static CommandMap commandMap;
     private static TS3Api api;
     private static ArrayList<IGenericEvent> eventList = new ArrayList<>();
-    public static Logger logger = Logger.getGlobal();
 
     public static boolean isUserAdmin(int id) {
         int[] groups = api.getClientInfo(id).getServerGroups();
@@ -35,7 +35,7 @@ public class Bot {
 
     public void init() {
         for (IGenericEvent event : eventList) {
-            if(event instanceof IOnBotStartingEvent) {
+            if (event instanceof IOnBotStartingEvent) {
                 ((IOnBotStartingEvent) event).onBotStarting();
             }
         }
@@ -70,7 +70,7 @@ public class Bot {
         logger.log(Level.INFO, "All TS3 events registered");
 
         for (IGenericEvent event : eventList) {
-            if(event instanceof IOnBotInitializedEvent) {
+            if (event instanceof IOnBotInitializedEvent) {
                 ((IOnBotInitializedEvent) event).onBotInitialized(api);
             }
         }
@@ -80,7 +80,7 @@ public class Bot {
                 logger.log(Level.INFO, "Shutting down safely");
                 api.sendServerMessage("Shutting down");
                 for (IGenericEvent event : eventList) {
-                    if(event instanceof IOnBotShutdownEvent) {
+                    if (event instanceof IOnBotShutdownEvent) {
                         ((IOnBotShutdownEvent) event).onBotShutdown(api, 0);
                     }
                 }
@@ -112,7 +112,7 @@ public class Bot {
             String[] args = textMessageEvent.getMessage().split(" ");
             ICommand command = commandMap.getOrDefault(args[0], new InvalidCommand());
 
-            if(!UserPowerHandler.getInstance().canExecuteCommand(command, textMessageEvent.getInvokerUniqueId())) {
+            if (!UserPowerHandler.getInstance().canExecuteCommand(command, textMessageEvent.getInvokerUniqueId())) {
                 api.sendPrivateMessage(textMessageEvent.getInvokerId(), "Insufficient permissions for command");
                 return;
             }

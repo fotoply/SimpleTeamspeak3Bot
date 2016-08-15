@@ -33,7 +33,7 @@ public class MapPersistence {
         }
     }
 
-    public static Map<String, HashMap<String,String>> readStringNestedMap(File file) {
+    public static Map<String, HashMap<String, String>> readStringNestedMap(File file) {
         Map<String, HashMap<String, String>> loadedMap = new HashMap<>();
         try {
             FileInputStream f = new FileInputStream(file);

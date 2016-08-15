@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class BotConfigReader {
     public static final String DEFAULT_CONFIG_PATH = "config.ini";
     private File configFile;
-    private HashMap<String,String> configData = new HashMap<>();
+    private HashMap<String, String> configData = new HashMap<>();
 
     public void loadConfig() {
         try {
@@ -43,8 +43,8 @@ public class BotConfigReader {
         Scanner scanner = new Scanner(configFile);
         while (scanner.hasNextLine()) {
             String[] input = scanner.nextLine().split("=");
-            if(input.length == 2 && !input[0].startsWith("#")) {
-                configData.put(input[0],input[1]);
+            if (input.length == 2 && !input[0].startsWith("#")) {
+                configData.put(input[0], input[1]);
             }
         }
     }
