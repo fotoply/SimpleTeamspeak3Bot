@@ -1,0 +1,31 @@
+package commands;
+
+import com.github.theholywaffle.teamspeak3.TS3Api;
+import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
+
+public class SettingsCommand implements ICommand {
+    @Override
+    public void run(TS3Api api, String[] args, TextMessageEvent event) {
+
+    }
+
+    @Override
+    public String getCommand() {
+        return "!settitngs";
+    }
+
+    @Override
+    public String getHelpText() {
+        return "Change personal settings";
+    }
+
+    @Override
+    public String getExtendedHelpText() {
+        return "!settings <settingName|list> <settingValue>";
+    }
+
+    @Override
+    public int getPowerRequired() {
+        return 0;
+    }
+}
