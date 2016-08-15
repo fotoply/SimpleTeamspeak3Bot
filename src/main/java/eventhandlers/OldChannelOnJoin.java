@@ -35,7 +35,7 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
     @Override
     public void onBotShutdown(TS3Api api, int shutdownCode) {
         Logger.getGlobal().log(Level.INFO, "Saving last channel data");
-        MapPersistence.saveStringIntegerMap(new File(SAVE_PATH), lastChannel);
+        MapPersistence.saveGenericMap(new File(SAVE_PATH), lastChannel);
         Logger.getGlobal().log(Level.INFO, "Saved last channel data successfully");
     }
 
