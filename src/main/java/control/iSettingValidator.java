@@ -1,5 +1,5 @@
 package control;
 
-public interface SettingValidator {
+public interface ISettingValidator {
     boolean isValidValue(String value);
 }
