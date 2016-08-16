@@ -1,5 +1,5 @@
 package control.settingvalidators;
 
-public abstract class SettingValidator {
+public abstract class AbstractSettingValidator {
     public abstract boolean isValidValue(String value);
 }

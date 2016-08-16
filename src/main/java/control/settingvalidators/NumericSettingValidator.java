@@ -3,7 +3,7 @@ package control.settingvalidators;
 /**
  * Allows any numeric value to be used, both integer and double
  */
-public class NumericSettingValidator extends SettingValidator {
+public class NumericSettingValidator extends AbstractSettingValidator {
     @Override
     public boolean isValidValue(String value) {
         try {

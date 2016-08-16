@@ -1,12 +1,12 @@
 package control;
 
-import control.settingvalidators.SettingValidator;
+import control.settingvalidators.AbstractSettingValidator;
 
 public class Setting {
-    private SettingValidator validator;
+    private AbstractSettingValidator validator;
     private String defaultValue;
 
-    public Setting(SettingValidator validator, String defaultValue) {
+    public Setting(AbstractSettingValidator validator, String defaultValue) {
         this.validator = validator;
         this.defaultValue = defaultValue;
     }
@@ -23,7 +23,7 @@ public class Setting {
         this.defaultValue = defaultValue;
     }
 
-    public void setValidator(SettingValidator validator) {
+    public void setValidator(AbstractSettingValidator validator) {
         this.validator = validator;
     }
 
