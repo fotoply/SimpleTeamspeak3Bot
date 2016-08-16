@@ -13,13 +13,13 @@ import java.util.List;
 public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEvent {
     private static final String SAVE_PATH = "data/settings.data";
     private static HashMap<String, HashMap<String, String>> userSettingsMap;
-    private static ArrayList<String> validSettings;
+    private static HashMap<String, String> validSettings;
     private static SettingsHandler instance;
     //TODO Allow commands and events to register valid settings
 
     private SettingsHandler() {
         userSettingsMap = new HashMap<>();
-        validSettings = new ArrayList<>();
+        validSettings = new HashMap<>();
     }
 
     public static SettingsHandler getInstance() {
@@ -51,32 +51,32 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     }
 
     public String getSetting(String UID, String setting) {
-        return getSettingOrDefault(UID, setting, "");
+        return getSettingOrDefault(UID, setting);
     }
 
-    public String getSettingOrDefault(String UID, String setting, String defaultValue) {
+    public String getSettingOrDefault(String UID, String setting) {
         HashMap<String, String> user = userSettingsMap.get(UID);
         if (user == null) {
-            return defaultValue;
+            return validSettings.get(setting);
         }
         String value = user.get(setting);
         if (value == null) {
-            return defaultValue;
+            return validSettings.get(setting);
         }
         return value;
     }
 
-    public void registerSetting(String setting) {
-        if(!validSettings.contains(setting.toLowerCase())) {
-            validSettings.add(setting.toLowerCase());
+    public void registerSetting(String setting, String defaultValue) {
+        if(!validSettings.containsKey(setting.toLowerCase())) {
+            validSettings.put(setting.toLowerCase(), defaultValue);
         }
     }
 
     public boolean isSettingValid(String setting) {
-        return validSettings.contains(setting.toLowerCase());
+        return validSettings.containsKey(setting.toLowerCase());
     }
 
-    public ArrayList<String> getValidSettings() {
+    public HashMap<String, String> getValidSettings() {
         return validSettings;
     }
 }

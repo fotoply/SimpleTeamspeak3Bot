@@ -13,7 +13,7 @@ public class SettingsCommand implements ICommand {
 
         if(settingsHandler.isSettingValid(args[1])) {
             if(args[2].equalsIgnoreCase("get")) {
-
+                api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[1], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[1])));
             } else if(args[2].equalsIgnoreCase("set")) {
 
             } else {
