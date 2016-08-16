@@ -15,7 +15,7 @@ public class SettingsCommand implements ICommand {
             if(args[2].equalsIgnoreCase("get")) {
                 api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[1], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[1])));
             } else if(args[2].equalsIgnoreCase("set")) {
-
+                settingsHandler.setSetting(event.getInvokerUniqueId(), args[2]);
             } else {
                 api.sendPrivateMessage(event.getInvokerId(), "Please either use set or get");
             }

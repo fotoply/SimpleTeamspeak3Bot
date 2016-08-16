@@ -45,9 +45,9 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     public void setSetting(String UID, String setting, String value) {
         HashMap<String, String> user = userSettingsMap.get(UID);
         if (user == null) {
-            userSettingsMap.put(UID, new HashMap<String, String>());
+            userSettingsMap.put(UID, new HashMap<>());
         }
-        user.put(setting, value);
+        user.put(setting.toLowerCase(), value);
     }
 
     public String getSetting(String UID, String setting) {
@@ -57,11 +57,11 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     public String getSettingOrDefault(String UID, String setting) {
         HashMap<String, String> user = userSettingsMap.get(UID);
         if (user == null) {
-            return validSettings.get(setting);
+            return validSettings.get(setting.toLowerCase());
         }
-        String value = user.get(setting);
+        String value = user.get(setting.toLowerCase());
         if (value == null) {
-            return validSettings.get(setting);
+            return validSettings.get(setting.toLowerCase());
         }
         return value;
     }
