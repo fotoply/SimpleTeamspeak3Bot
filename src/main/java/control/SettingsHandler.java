@@ -51,10 +51,6 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
         user.put(setting.toLowerCase(), value);
     }
 
-    public String getSetting(String UID, String setting) {
-        return getSettingOrDefault(UID, setting);
-    }
-
     public String getSettingOrDefault(String UID, String setting) {
         HashMap<String, String> user = userSettingsMap.get(UID);
         if (user == null) {
