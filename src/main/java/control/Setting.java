@@ -1,6 +1,9 @@
 package control;
 
 public class Setting {
+    private SettingValidator validator;
+    private String value;
+
     /*TODO Implement setting class and make it have the following:
     The ability to have an unrestricted setting, where the value can be any user-chosen value
     The ability to have a semi-restricted numeric value, where the event/command pre-defines a range
