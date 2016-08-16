@@ -44,11 +44,9 @@ public class UserPowerHandler implements IOnBotShutdownEvent, IOnBotInitializedE
     }
 
     public int getUserPowerLevelFromRank(String UID) {
-        System.out.println("Unknown power found, checking");
         int powerLevel = 0;
 
         if (tsAPI != null) {
-            System.out.println("API is not null");
             int[] groups = tsAPI.getClientByUId(UID).getServerGroups();
             for (int i = 0; i < groups.length; i++) {
                 if (groups[i] == 10) {
@@ -57,7 +55,6 @@ public class UserPowerHandler implements IOnBotShutdownEvent, IOnBotInitializedE
                     }
                 } else if (groups[i] == 6) {
                     powerLevel = 100;
-                    System.out.println("Server admin found who is not in the power list");
                 }
             }
         }
