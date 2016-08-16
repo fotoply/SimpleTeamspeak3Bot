@@ -3,6 +3,7 @@ package eventhandlers;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
+import control.SettingsHandler;
 import control.utils.MapPersistence;
 import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
@@ -16,12 +17,15 @@ import java.util.logging.Logger;
 
 public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShutdownEvent, IOnBotInitializedEvent {
     private static final String SAVE_PATH = "data/oldChannel.data";
+    public static final String SETTING_NAME = "autojoin_channel";
     private static HashMap<String, Integer> lastChannel = new HashMap<>();
 
     @Override
     public void onJoin(TS3Api api, ClientJoinEvent joinEvent) {
         if (lastChannel.getOrDefault(joinEvent.getUniqueClientIdentifier(), 1) != 1) {
-            api.moveClient(joinEvent.getClientId(), lastChannel.get(joinEvent.getUniqueClientIdentifier()));
+            if(SettingsHandler.getInstance().getSetting(joinEvent.getInvokerUniqueId(), SETTING_NAME).equalsIgnoreCase("on")) {
+                api.moveClient(joinEvent.getClientId(), lastChannel.get(joinEvent.getUniqueClientIdentifier()));
+            }
         }
     }
 
@@ -45,6 +49,7 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
         if (dataFile.exists()) {
             lastChannel.putAll(MapPersistence.readStringIntegerMap(dataFile));
         }
+        SettingsHandler.getInstance().registerSetting(SETTING_NAME, "on");
     }
 }
 

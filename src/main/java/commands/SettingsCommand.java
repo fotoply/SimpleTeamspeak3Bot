@@ -20,6 +20,8 @@ public class SettingsCommand implements ICommand {
             } else {
                 api.sendPrivateMessage(event.getInvokerId(), "Please either use set or get");
             }
+        } else if(args[1].equalsIgnoreCase("list")) {
+            //TODO implement list all settings
         } else {
             api.sendPrivateMessage(event.getInvokerId(), "No such setting exists");
         }
