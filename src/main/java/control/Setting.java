@@ -1,7 +1,9 @@
 package control;
 
+import control.settingvalidators.SettingValidator;
+
 public class Setting {
-    private ISettingValidator validator;
+    private SettingValidator validator;
     private String defaultValue;
 
     public String getDefaultValue() {
@@ -16,7 +18,7 @@ public class Setting {
         this.defaultValue = defaultValue;
     }
 
-    public void setValidator(ISettingValidator validator) {
+    public void setValidator(SettingValidator validator) {
         this.validator = validator;
     }
 
