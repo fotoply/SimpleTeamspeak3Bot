@@ -15,7 +15,7 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     private static HashMap<String, HashMap<String, String>> userSettingsMap;
     private static HashMap<String, String> validSettings;
     private static SettingsHandler instance;
-    //TODO Allow commands and events to register valid settings
+    //TODO Make it possible to enter what values are valid for a setting.
 
     private SettingsHandler() {
         userSettingsMap = new HashMap<>();
