@@ -13,9 +13,8 @@ import java.util.List;
 public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEvent {
     private static final String SAVE_PATH = "data/settings.data";
     private static HashMap<String, HashMap<String, String>> userSettingsMap;
-    private static HashMap<String, String> validSettings;
+    private static HashMap<String, Setting> validSettings;
     private static SettingsHandler instance;
-    //TODO Make it possible to enter what values are valid for a setting.
 
     private SettingsHandler() {
         userSettingsMap = new HashMap<>();
@@ -54,18 +53,18 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     public String getSettingOrDefault(String UID, String setting) {
         HashMap<String, String> user = userSettingsMap.get(UID);
         if (user == null) {
-            return validSettings.get(setting.toLowerCase());
+            return validSettings.get(setting.toLowerCase()).getDefaultValue();
         }
         String value = user.get(setting.toLowerCase());
         if (value == null) {
-            return validSettings.get(setting.toLowerCase());
+            return validSettings.get(setting.toLowerCase()).getDefaultValue();
         }
         return value;
     }
 
-    public void registerSetting(String setting, String defaultValue) {
+    public void registerSetting(String setting, Setting settingManager) {
         if(!validSettings.containsKey(setting.toLowerCase())) {
-            validSettings.put(setting.toLowerCase(), defaultValue);
+            validSettings.put(setting.toLowerCase(), settingManager);
         }
     }
 
@@ -73,7 +72,11 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
         return validSettings.containsKey(setting.toLowerCase());
     }
 
-    public HashMap<String, String> getValidSettings() {
+    public boolean isValueValid(String setting, String value) {
+        return validSettings.get(setting.toLowerCase()).isValueValid(value);
+    }
+
+    public HashMap<String, Setting> getValidSettings() {
         return validSettings;
     }
 }

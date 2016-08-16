@@ -3,7 +3,10 @@ package eventhandlers;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
+import control.Setting;
 import control.SettingsHandler;
+import control.settingvalidators.AbstractSettingValidator;
+import control.settingvalidators.SimpleSettingValidator;
 import control.utils.MapPersistence;
 import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
@@ -49,7 +52,13 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
         if (dataFile.exists()) {
             lastChannel.putAll(MapPersistence.readStringIntegerMap(dataFile));
         }
-        SettingsHandler.getInstance().registerSetting(SETTING_NAME, "on");
+        SimpleSettingValidator validator = new SimpleSettingValidator();
+        validator.addAllowedOption("on");
+        validator.addAllowedOption("off");
+        validator.addAllowedOption("enable");
+        validator.addAllowedOption("disable");
+        Setting setting = new Setting(validator, "on");
+        SettingsHandler.getInstance().registerSetting(SETTING_NAME, setting);
     }
 }
 
