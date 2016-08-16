@@ -94,6 +94,7 @@ public class Bot {
         eventList.add(new OldChannelOnJoin());
         eventList.add(new PokeCommand());
         eventList.add(UserPowerHandler.getInstance());
+        eventList.add(SettingsHandler.getInstance());
     }
 
     private void initCommands() {
