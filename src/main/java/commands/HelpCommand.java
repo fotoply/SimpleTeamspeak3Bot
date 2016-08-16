@@ -10,7 +10,7 @@ public class HelpCommand implements ICommand {
         if (args.length == 1) {
             Bot.getCommandMap().forEach((key, command) -> {
                 if (!command.getCommand().equalsIgnoreCase("")) {
-                    api.sendPrivateMessage(event.getInvokerId(), String.format("%10s - %s", command.getCommand(), command.getHelpText()));
+                    api.sendPrivateMessage(event.getInvokerId(), String.format("%-10s - %s", command.getCommand(), command.getHelpText()));
                 }
             });
             api.sendPrivateMessage(event.getInvokerId(), "Use !help <command> to get more help for that specific command");
