@@ -93,6 +93,7 @@ public class Bot {
         commandMap.addCommand(new PokeCommand());
         commandMap.addCommand(new HelpCommand());
         commandMap.addCommand(new PowerCommand());
+        commandMap.addCommand(new SettingsCommand());
     }
 
     private static class InternalEventDelegator implements TS3Listener {
