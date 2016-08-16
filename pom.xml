@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>1</groupId>
-    <artifactId>TS3Bot2.0</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>SimpleTeamspeak3Bot</artifactId>
+    <version>0.5-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -43,23 +43,48 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <!-- DO NOT include log4j.properties file in your Jar -->
                     <excludes>
                         <exclude>**/log4j.properties</exclude>
                     </excludes>
                     <archive>
                         <manifest>
-                            <!-- Jar file entry point -->
                             <mainClass>control.BotInitializer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <excludes>
+                        <exclude>**/log4j.properties</exclude>
+                    </excludes>
+                    <archive>
+                        <manifest>
+                            <mainClass>control.BotInitializer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
 
+            </plugin>
         </plugins>
     </build>
 </project>

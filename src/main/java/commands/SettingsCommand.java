@@ -6,7 +6,7 @@ import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 public class SettingsCommand implements ICommand {
     @Override
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
-
+        //TODO Implement a functional settings command.
     }
 
     @Override

@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="SimpleTeamspeak3Bot" />
         <module name="TS3Bot2.0" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="SimpleTeamspeak3Bot" target="1.8" />
       <module name="TS3Bot2.0" target="1.8" />
     </bytecodeTargetLevel>
   </component>

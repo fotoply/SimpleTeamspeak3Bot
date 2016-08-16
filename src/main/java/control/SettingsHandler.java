@@ -12,6 +12,7 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
     private static final String SAVE_PATH = "data/settings.data";
     private static HashMap<String, HashMap<String, String>> userSettingsMap;
     private static SettingsHandler instance;
+    //TODO Allow commands and events to register valid settings
 
     private SettingsHandler() {
 
