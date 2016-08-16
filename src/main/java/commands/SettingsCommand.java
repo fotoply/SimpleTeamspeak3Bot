@@ -15,14 +15,14 @@ public class SettingsCommand implements ICommand {
             if(args[2].equalsIgnoreCase("get")) {
                 api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[1], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[1])));
             } else if(args[2].equalsIgnoreCase("set")) {
-                settingsHandler.setSetting(event.getInvokerUniqueId(), args[2]);
+                settingsHandler.setSetting(event.getInvokerUniqueId(), args[1], args[3]); //TODO Implement support for multi-word settings
+                api.sendPrivateMessage(event.getInvokerId(), "Setting was saved");
             } else {
                 api.sendPrivateMessage(event.getInvokerId(), "Please either use set or get");
             }
         } else {
             api.sendPrivateMessage(event.getInvokerId(), "No such setting exists");
         }
-        //TODO Implement a functional settings command.
     }
 
     @Override
