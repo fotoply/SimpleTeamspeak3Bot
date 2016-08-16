@@ -6,6 +6,11 @@ public class Setting {
     private SettingValidator validator;
     private String defaultValue;
 
+    public Setting(SettingValidator validator, String defaultValue) {
+        this.validator = validator;
+        this.defaultValue = defaultValue;
+    }
+
     public String getDefaultValue() {
         return defaultValue;
     }
