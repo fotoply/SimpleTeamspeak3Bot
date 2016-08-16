@@ -28,7 +28,7 @@ public class Setting {
     }
 
     /*TODO Implement setting class and make it have the following:
-    The ability to have an unrestricted setting, where the values can be any programmer-chosen defaultValue
+    The ability to have an unrestricted setting, where the values can be any user-chosen value
     The ability to have a semi-restricted numeric defaultValue, where the event/command pre-defines a range
     The ability to have a semi-restricted string defaultValue where the event/command pre-defines this
     The ability to have a restricted string defaultValue where the event/command pre-defines all values possible
