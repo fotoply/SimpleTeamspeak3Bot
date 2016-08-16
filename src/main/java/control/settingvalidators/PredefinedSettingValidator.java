@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * A simple settings validator which will return true for any setting in the list of allowed options
  */
-public class SimpleSettingValidator extends AbstractSettingValidator {
+public class PredefinedSettingValidator extends AbstractSettingValidator {
     private ArrayList<String> allowedOptions = new ArrayList<>();
 
     @Override

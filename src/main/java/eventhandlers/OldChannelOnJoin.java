@@ -5,8 +5,7 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
 import control.Setting;
 import control.SettingsHandler;
-import control.settingvalidators.AbstractSettingValidator;
-import control.settingvalidators.SimpleSettingValidator;
+import control.settingvalidators.PredefinedSettingValidator;
 import control.utils.MapPersistence;
 import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
@@ -53,7 +52,7 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
         if (dataFile.exists()) {
             lastChannel.putAll(MapPersistence.readStringIntegerMap(dataFile));
         }
-        SimpleSettingValidator validator = new SimpleSettingValidator();
+        PredefinedSettingValidator validator = new PredefinedSettingValidator();
         validator.addAllowedOption("on");
         validator.addAllowedOption("off");
         validator.addAllowedOption("enable");
