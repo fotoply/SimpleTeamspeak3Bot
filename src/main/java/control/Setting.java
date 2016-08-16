@@ -7,5 +7,6 @@ public class Setting {
     The ability to have a semi-restricted string value where the event/command pre-defines this
     The ability to have a restricted string value where the event/command pre-defines all values possible
 
+    It should also contain a way to register a default value.
     */
 }
