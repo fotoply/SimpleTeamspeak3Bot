@@ -19,16 +19,6 @@ public class Bot {
     private static TS3Api api;
     private static ArrayList<IGenericEvent> eventList = new ArrayList<>();
 
-    public static boolean isUserAdmin(int id) {
-        int[] groups = api.getClientInfo(id).getServerGroups();
-        for (int i = 0; i < groups.length; i++) {
-            if (groups[i] == 6 || groups[i] == 10) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static CommandMap getCommandMap() {
         return commandMap;
     }
