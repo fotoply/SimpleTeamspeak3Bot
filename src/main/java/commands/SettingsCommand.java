@@ -11,7 +11,7 @@ public class SettingsCommand implements ICommand {
 
     @Override
     public String getCommand() {
-        return "!settitngs";
+        return "!settings";
     }
 
     @Override
