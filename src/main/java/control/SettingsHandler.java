@@ -6,16 +6,20 @@ import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEvent {
     private static final String SAVE_PATH = "data/settings.data";
     private static HashMap<String, HashMap<String, String>> userSettingsMap;
+    private static ArrayList<String> validSettings;
     private static SettingsHandler instance;
     //TODO Allow commands and events to register valid settings
 
     private SettingsHandler() {
-
+        userSettingsMap = new HashMap<>();
+        validSettings = new ArrayList<>();
     }
 
     public static SettingsHandler getInstance() {
@@ -60,5 +64,19 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
             return defaultValue;
         }
         return value;
+    }
+
+    public void registerSetting(String setting) {
+        if(!validSettings.contains(setting.toLowerCase())) {
+            validSettings.add(setting.toLowerCase());
+        }
+    }
+
+    public boolean isSettingValid(String setting) {
+        return validSettings.contains(setting.toLowerCase());
+    }
+
+    public ArrayList<String> getValidSettings() {
+        return validSettings;
     }
 }
