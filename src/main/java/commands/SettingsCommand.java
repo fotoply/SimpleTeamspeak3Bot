@@ -11,7 +11,7 @@ public class SettingsCommand implements ICommand {
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
         settingsHandler = SettingsHandler.getInstance();
 
-        if(settingsHandler.isSettingValid(args[2])) {
+        if(args.length > 2 && settingsHandler.isSettingValid(args[2])) {
             if(args[1].equalsIgnoreCase("get")) {
                 api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[1], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[1])));
             } else if(args[1].equalsIgnoreCase("set")) {
