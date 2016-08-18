@@ -6,6 +6,7 @@ import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.event.*;
 import commands.*;
 import control.config.BotConfigReader;
+import eventhandlers.BanishmentAutoOnJoin;
 import eventhandlers.OldChannelOnJoin;
 import events.*;
 
@@ -85,6 +86,7 @@ public class Bot {
         eventList.add(new PokeCommand());
         eventList.add(UserPowerHandler.getInstance());
         eventList.add(SettingsHandler.getInstance());
+        eventList.add(new BanishmentAutoOnJoin());
     }
 
     private void initCommands() {
