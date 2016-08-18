@@ -15,6 +15,10 @@ public class Setting {
         return defaultValue;
     }
 
+    public String describeValids() {
+        return validator.validSettings();
+    }
+
     public boolean isValueValid(String value) {
         return validator.isValidValue(value);
     }

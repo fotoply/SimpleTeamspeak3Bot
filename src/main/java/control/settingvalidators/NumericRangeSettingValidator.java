@@ -25,4 +25,9 @@ public class NumericRangeSettingValidator extends AbstractSettingValidator {
         }
         return true;
     }
+
+    @Override
+    public String validSettings() {
+        return "[" + lowerLimit + ";" + upperLimit + "] (Real numbers)";
+    }
 }

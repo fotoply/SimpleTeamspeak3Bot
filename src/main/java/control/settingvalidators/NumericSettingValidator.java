@@ -13,4 +13,9 @@ public class NumericSettingValidator extends AbstractSettingValidator {
         }
         return true;
     }
+
+    @Override
+    public String validSettings() {
+        return "Any real number";
+    }
 }

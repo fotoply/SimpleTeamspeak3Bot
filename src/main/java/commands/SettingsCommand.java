@@ -25,7 +25,14 @@ public class SettingsCommand implements ICommand {
                 api.sendPrivateMessage(event.getInvokerId(), "Please either use set or get");
             }
         } else if(args[1].equalsIgnoreCase("list")) {
-            //TODO implement list all settings
+            settingsHandler.getValidSettings().forEach((key, setting) -> {
+                StringBuilder message = new StringBuilder();
+                message.append(" - ");
+                message.append(key);
+                message.append(" # Valid: ");
+                message.append(setting.describeValids());
+                api.sendPrivateMessage(event.getInvokerId(), message.toString());
+            });
         } else {
             api.sendPrivateMessage(event.getInvokerId(), "No such setting exists");
         }

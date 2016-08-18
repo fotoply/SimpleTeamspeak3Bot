@@ -29,4 +29,11 @@ public class IntegerRangeSettingValidator extends AbstractSettingValidator {
         }
         return true;
     }
+
+    @Override
+    public String validSettings() {
+        return "[" + lowerLimit + ";" + upperLimit + "] (Whole numbers)";
+    }
+
+
 }

@@ -8,4 +8,9 @@ public class UnrestrictedSettingValidator extends AbstractSettingValidator {
     public boolean isValidValue(String value) {
         return true;
     }
+
+    @Override
+    public String validSettings() {
+        return "Anything";
+    }
 }

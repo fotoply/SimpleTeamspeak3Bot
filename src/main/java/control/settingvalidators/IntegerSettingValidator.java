@@ -13,4 +13,9 @@ public class IntegerSettingValidator extends AbstractSettingValidator {
         }
         return true;
     }
+
+    @Override
+    public String validSettings() {
+        return "Any whole number";
+    }
 }

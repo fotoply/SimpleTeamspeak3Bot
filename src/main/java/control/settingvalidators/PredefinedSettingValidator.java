@@ -1,6 +1,7 @@
 package control.settingvalidators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple settings validator which will return true for any setting in the list of allowed options
@@ -11,6 +12,11 @@ public class PredefinedSettingValidator extends AbstractSettingValidator {
     @Override
     public boolean isValidValue(String value) {
         return allowedOptions.contains(value.toLowerCase());
+    }
+
+    @Override
+    public String validSettings() {
+        return Arrays.toString(allowedOptions.toArray());
     }
 
     public void addAllowedOptions(ArrayList<String> options) {
