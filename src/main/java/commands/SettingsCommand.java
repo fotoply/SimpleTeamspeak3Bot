@@ -13,7 +13,7 @@ public class SettingsCommand implements ICommand {
 
         if(args.length > 2 && settingsHandler.isSettingValid(args[2])) {
             if(args[1].equalsIgnoreCase("get")) {
-                api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[1], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[1])));
+                api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[2], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[2])));
             } else if(args[1].equalsIgnoreCase("set")) {
                 if(settingsHandler.isValueValid(args[2], args[3])) {
                     settingsHandler.setSetting(event.getInvokerUniqueId(), args[2], args[3]); //TODO Implement support for multi-word settings
