@@ -60,5 +60,9 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
         Setting setting = new Setting(validator, "on");
         SettingsHandler.getInstance().registerSetting(SETTING_NAME, setting);
     }
+
+    public static int getLastChannel(String UID) {
+        return lastChannel.getOrDefault(UID, 1);
+    }
 }
 
