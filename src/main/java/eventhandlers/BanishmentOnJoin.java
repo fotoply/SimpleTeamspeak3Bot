@@ -4,7 +4,7 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import events.IOnJoinEvent;
 
-public class BanishmentAutoOnJoin implements IOnJoinEvent {
+public class BanishmentOnJoin implements IOnJoinEvent {
 
     public static final int BANISHMENT_CHANNEL_ID = 9;
 
