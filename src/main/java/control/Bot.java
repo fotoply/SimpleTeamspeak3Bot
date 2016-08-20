@@ -100,6 +100,12 @@ public class Bot {
 
     private static class InternalEventDelegator implements TS3Listener {
         public void onTextMessage(TextMessageEvent textMessageEvent) {
+            eventList.forEach((event) -> {
+                if (event instanceof IOnMessageRecievedEvent) {
+                    ((IOnMessageRecievedEvent) event).onMessage(api, textMessageEvent);
+                }
+            });
+
             if (!textMessageEvent.getMessage().startsWith("!")) {
                 return;
             }
