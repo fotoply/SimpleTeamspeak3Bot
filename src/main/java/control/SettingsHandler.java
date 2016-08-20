@@ -62,9 +62,16 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
         return value;
     }
 
-    public void registerSetting(String setting, Setting settingManager) {
-        if(!validSettings.containsKey(setting.toLowerCase())) {
-            validSettings.put(setting.toLowerCase(), settingManager);
+    /**
+     * Register a setting with the settings handler to allow it to be retrieved for later usage.
+     *
+     * Setting objects are <u>not</u> stored between restarts but user settings are.
+     * @param settingName the name of the setting
+     * @param settingManager the setting manager object
+     */
+    public void registerSetting(String settingName, Setting settingManager) {
+        if(!validSettings.containsKey(settingName.toLowerCase())) {
+            validSettings.put(settingName.toLowerCase(), settingManager);
         }
     }
 
@@ -72,8 +79,15 @@ public class SettingsHandler implements IOnBotShutdownEvent, IOnBotInitializedEv
         return validSettings.containsKey(setting.toLowerCase());
     }
 
-    public boolean isValueValid(String setting, String value) {
-        return validSettings.get(setting.toLowerCase()).isValueValid(value);
+    /**
+     * Returns if a given value is valid for a given setting.
+     * Does not check for validity of the setting itself and <u>will</u> throw a NullPointerException if used on an invalid settingName
+     * @param settingName
+     * @param value
+     * @return true if valid otherwise false
+     */
+    public boolean isValueValid(String settingName, String value) {
+        return validSettings.get(settingName.toLowerCase()).isValueValid(value);
     }
 
     public HashMap<String, Setting> getValidSettings() {
