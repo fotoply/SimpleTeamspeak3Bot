@@ -25,11 +25,19 @@ public class OldChannelOnJoin implements IOnJoinEvent, IOnMovedEvent, IOnBotShut
     @Override
     public void onJoin(TS3Api api, ClientJoinEvent joinEvent) {
         if (lastChannel.getOrDefault(joinEvent.getUniqueClientIdentifier(), 1) != 1) {
-            String currentSetting = SettingsHandler.getInstance().getSettingOrDefault(joinEvent.getUniqueClientIdentifier(), SETTING_NAME);
-            if(currentSetting.equalsIgnoreCase("on") || currentSetting.equalsIgnoreCase("enable")) {
+            String currentSetting = getCurrentSettingForUID(joinEvent.getUniqueClientIdentifier());
+            if(isAutojoinActive(currentSetting)) {
                 api.moveClient(joinEvent.getClientId(), lastChannel.get(joinEvent.getUniqueClientIdentifier()));
             }
         }
+    }
+
+    private String getCurrentSettingForUID(String UID) {
+        return SettingsHandler.getInstance().getSettingOrDefault(UID, SETTING_NAME);
+    }
+
+    private boolean isAutojoinActive(String currentSetting) {
+        return currentSetting.equalsIgnoreCase("on") || currentSetting.equalsIgnoreCase("enable");
     }
 
     @Override
