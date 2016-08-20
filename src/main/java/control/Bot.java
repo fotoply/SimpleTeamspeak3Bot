@@ -82,6 +82,7 @@ public class Bot {
 
     private void initEvents() {
 
+        eventList.add(CommandHandler.getInstance());
         eventList.add(new OldChannelOnJoin());
         eventList.add(new PokeCommand());
         eventList.add(UserPowerHandler.getInstance());
@@ -90,7 +91,7 @@ public class Bot {
     }
 
     private void initCommands() {
-        commandMap = new CommandMap();
+        commandMap = CommandMap.getInstance();
 
         commandMap.addCommand(new PokeCommand());
         commandMap.addCommand(new HelpCommand());
@@ -105,23 +106,6 @@ public class Bot {
                     ((IOnMessageRecievedEvent) event).onMessage(api, textMessageEvent);
                 }
             });
-            //TODO Split this into it's own subclass of the message event implementation
-            if (!textMessageEvent.getMessage().startsWith("!")) {
-                return;
-            }
-
-            String[] args = textMessageEvent.getMessage().split(" ");
-            ICommand command = commandMap.getOrDefault(args[0], new InvalidCommand());
-
-            if (!UserPowerHandler.getInstance().canExecuteCommand(command, textMessageEvent.getInvokerUniqueId())) {
-                api.sendPrivateMessage(textMessageEvent.getInvokerId(), "Insufficient permissions for command");
-                return;
-            }
-
-            Thread thread = new Thread(() -> {
-                command.run(api, args, textMessageEvent);
-            });
-            thread.start();
         }
 
         public void onClientJoin(ClientJoinEvent clientJoinEvent) {

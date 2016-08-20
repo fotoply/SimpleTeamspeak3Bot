@@ -1,8 +1,22 @@
 package commands;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class CommandMap extends HashMap<String, ICommand> {
+    public static CommandMap instance;
+
+    public static CommandMap getInstance() {
+        if(instance == null) {
+            instance = new CommandMap();
+        }
+        return instance;
+    }
+
+    private CommandMap() {
+
+    }
+
     @Override
     public ICommand put(String key, ICommand value) {
         return super.put(key.toLowerCase(), value);
