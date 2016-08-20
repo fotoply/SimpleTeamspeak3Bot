@@ -105,7 +105,7 @@ public class Bot {
                     ((IOnMessageRecievedEvent) event).onMessage(api, textMessageEvent);
                 }
             });
-
+            //TODO Split this into it's own subclass of the message event implementation
             if (!textMessageEvent.getMessage().startsWith("!")) {
                 return;
             }
