@@ -1,8 +1,8 @@
 package control.settingvalidators;
 
 public class NumericRangeSettingValidator extends AbstractSettingValidator {
-    double upperLimit;
-    double lowerLimit;
+    private double upperLimit;
+    private double lowerLimit;
 
     public NumericRangeSettingValidator(double upperLimit, double lowerLimit) {
         this.upperLimit = upperLimit;

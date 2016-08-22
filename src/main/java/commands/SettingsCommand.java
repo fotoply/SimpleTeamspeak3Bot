@@ -5,11 +5,10 @@ import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import control.SettingsHandler;
 
 public class SettingsCommand implements ICommand {
-    SettingsHandler settingsHandler;
 
     @Override
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
-        settingsHandler = SettingsHandler.getInstance();
+        SettingsHandler settingsHandler = SettingsHandler.getInstance();
 
         if(args.length > 2 && settingsHandler.isSettingValid(args[2])) {
             if(args[1].equalsIgnoreCase("get")) {

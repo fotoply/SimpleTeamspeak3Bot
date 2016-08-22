@@ -5,8 +5,8 @@ package control.settingvalidators;
  * This range is inclusive on both ends
  */
 public class IntegerRangeSettingValidator extends AbstractSettingValidator {
-    int upperLimit;
-    int lowerLimit;
+    private int upperLimit;
+    private int lowerLimit;
 
     public IntegerRangeSettingValidator(int upperLimit, int lowerLimit) {
         this.upperLimit = upperLimit;
@@ -27,6 +27,7 @@ public class IntegerRangeSettingValidator extends AbstractSettingValidator {
         if (numberValue > upperLimit) {
             return false;
         }
+
         return true;
     }
 

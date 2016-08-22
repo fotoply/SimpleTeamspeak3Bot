@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class BotConfigReader {
-    public static final String DEFAULT_CONFIG_PATH = "config.ini";
-    private File configFile;
+    private static final String DEFAULT_CONFIG_PATH = "config.ini";
     private HashMap<String, String> configData = new HashMap<>();
 
     public void loadConfig() {
