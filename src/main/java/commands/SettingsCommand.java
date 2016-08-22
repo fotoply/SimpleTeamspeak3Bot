@@ -29,7 +29,7 @@ public class SettingsCommand implements ICommand {
                 StringBuilder message = new StringBuilder();
                 message.append(" - ");
                 message.append(key);
-                message.append(" # Valid: ");
+                message.append(" | Valid: ");
                 message.append(setting.describeValids());
                 api.sendPrivateMessage(event.getInvokerId(), message.toString());
             });
