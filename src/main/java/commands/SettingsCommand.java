@@ -16,7 +16,8 @@ public class SettingsCommand implements ICommand {
                 api.sendPrivateMessage(event.getInvokerId(), String.format("%s - %s", args[2], settingsHandler.getSettingOrDefault(event.getInvokerUniqueId(), args[2])));
             } else if(args[1].equalsIgnoreCase("set")) {
                 if(settingsHandler.isValueValid(args[2], args[3])) {
-                    settingsHandler.setSetting(event.getInvokerUniqueId(), args[2], args[3]); //TODO Implement support for multi-word settings
+                    String extraArgs = event.getMessage().substring(event.getMessage().indexOf(" ", event.getMessage().indexOf(" ")+1)+1); // Removes the first two arguments
+                    settingsHandler.setSetting(event.getInvokerUniqueId(), args[2], extraArgs);
                     api.sendPrivateMessage(event.getInvokerId(), "Setting was saved");
                 } else {
                     api.sendPrivateMessage(event.getInvokerId(), "Invalid value for setting");
