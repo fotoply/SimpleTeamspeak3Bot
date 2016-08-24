@@ -10,6 +10,7 @@ import events.IOnJoinEvent;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBotShutdownEvent, IOnJoinEvent {
     private static final String SAVE_PATH = "data/lastseen.data";
@@ -28,7 +29,18 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
 
     @Override
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
+        lastseenInfoMap.forEach((uid, user) -> {
+            if(user.get("username").contains(args[1].toLowerCase())) {
+                String lastSeen = calculateLastSeenTime(user.get("lastseen"));
+                api.sendPrivateMessage(event.getInvokerId(), String.format("%s (%s) was last seen %s days ago", user.get("username"), uid, lastSeen));
+            }
+        });
+    }
 
+    private String calculateLastSeenTime(String lastseen) {
+        long lastSeenTime = Long.valueOf(lastseen);
+        long dif = lastSeenTime - System.currentTimeMillis();
+        return String.valueOf(TimeUnit.MILLISECONDS.toDays(dif));
     }
 
     @Override
@@ -67,7 +79,7 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
     @Override
     public void onJoin(TS3Api api, ClientJoinEvent joinEvent) {
         HashMap<String, String> info = new HashMap<>();
-        info.put("username", joinEvent.getClientNickname());
+        info.put("username", joinEvent.getClientNickname().toLowerCase());
         info.put("lastseen", String.valueOf(System.currentTimeMillis()));
         lastseenInfoMap.put(joinEvent.getUniqueClientIdentifier(), info);
     }
