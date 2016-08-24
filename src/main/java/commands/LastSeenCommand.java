@@ -88,5 +88,4 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
         info.put("lastseen", String.valueOf(System.currentTimeMillis()));
         lastseenInfoMap.put(joinEvent.getUniqueClientIdentifier(), info);
     }
-    //TODO Make this command give back the latest seen for a given username, with UID's attached for usernames seen over multiple
 }
