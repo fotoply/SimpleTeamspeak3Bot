@@ -88,6 +88,7 @@ public class Bot {
         eventList.add(UserPowerHandler.getInstance());
         eventList.add(SettingsHandler.getInstance());
         eventList.add(new BanishmentOnJoin());
+        eventList.add(LastSeenCommand.getInstance());
     }
 
     private void initCommands() {
@@ -97,6 +98,7 @@ public class Bot {
         commandMap.addCommand(new HelpCommand());
         commandMap.addCommand(new PowerCommand());
         commandMap.addCommand(new SettingsCommand());
+        commandMap.addCommand(LastSeenCommand.getInstance());
     }
 
     private static class InternalEventDelegator implements TS3Listener {

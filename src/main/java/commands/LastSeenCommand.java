@@ -29,12 +29,17 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
 
     @Override
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
+        final boolean[] seen = {false};
         lastseenInfoMap.forEach((uid, user) -> {
             if(user.get("username").contains(args[1].toLowerCase())) {
                 String lastSeen = calculateLastSeenTime(user.get("lastseen"));
                 api.sendPrivateMessage(event.getInvokerId(), String.format("%s (%s) was last seen %s days ago", user.get("username"), uid, lastSeen));
+                seen[0] = true;
             }
         });
+        if(!seen[0]) {
+            api.sendPrivateMessage(event.getInvokerId(), "No such username has been seen");
+        }
     }
 
     private String calculateLastSeenTime(String lastseen) {
