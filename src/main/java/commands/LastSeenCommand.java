@@ -1,18 +1,21 @@
 package commands;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
+import com.github.theholywaffle.teamspeak3.api.ClientProperty;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
+import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import control.utils.MapPersistence;
 import events.IOnBotInitializedEvent;
 import events.IOnBotShutdownEvent;
 import events.IOnJoinEvent;
+import events.IOnLeaveEvent;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBotShutdownEvent, IOnJoinEvent {
+public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBotShutdownEvent, IOnJoinEvent, IOnLeaveEvent {
     private static final String SAVE_PATH = "data/lastseen.data";
     private static HashMap<String, HashMap<String, String>> lastseenInfoMap;
     private static LastSeenCommand instance;
@@ -83,9 +86,22 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
 
     @Override
     public void onJoin(TS3Api api, ClientJoinEvent joinEvent) {
+        String nickname = joinEvent.getClientNickname().toLowerCase();
+        String UID = joinEvent.getUniqueClientIdentifier();
+        updateLastSeenForUID(nickname, UID);
+    }
+
+    private void updateLastSeenForUID(String nickname, String UID) {
         HashMap<String, String> info = new HashMap<>();
-        info.put("username", joinEvent.getClientNickname().toLowerCase());
+        info.put("username", nickname);
         info.put("lastseen", String.valueOf(System.currentTimeMillis()));
-        lastseenInfoMap.put(joinEvent.getUniqueClientIdentifier(), info);
+        lastseenInfoMap.put(UID, info);
+    }
+
+    @Override
+    public void onLeave(TS3Api api, ClientLeaveEvent leaveEvent) {
+        String nickname = leaveEvent.get(ClientProperty.CLIENT_NICKNAME).toLowerCase();
+        String UID = leaveEvent.get(ClientProperty.CLIENT_UNIQUE_IDENTIFIER);
+        updateLastSeenForUID(nickname, UID);
     }
 }
