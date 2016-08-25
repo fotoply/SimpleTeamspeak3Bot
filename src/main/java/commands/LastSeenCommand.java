@@ -33,7 +33,7 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
         lastseenInfoMap.forEach((uid, user) -> {
             if(user.get("username").contains(args[1].toLowerCase())) {
                 String lastSeen = calculateLastSeenTime(user.get("lastseen"));
-                api.sendPrivateMessage(event.getInvokerId(), String.format("%s (%s) was last seen %s days ago", user.get("username"), uid, lastSeen));
+                api.sendPrivateMessage(event.getInvokerId(), String.format("%s (%s) was last seen %s ago", user.get("username"), uid, lastSeen));
                 seen[0] = true;
             }
         });
@@ -45,7 +45,7 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
     private String calculateLastSeenTime(String lastseen) {
         long lastSeenTime = Long.valueOf(lastseen);
         long dif = lastSeenTime - System.currentTimeMillis();
-        return String.valueOf(TimeUnit.MILLISECONDS.toDays(dif));
+        return String.valueOf(TimeUnit.MILLISECONDS.toDays(dif)) + " days and " + TimeUnit.MILLISECONDS.toHours(dif)%24 + " hours";
     }
 
     @Override
