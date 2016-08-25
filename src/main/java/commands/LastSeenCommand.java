@@ -45,7 +45,7 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
     private String calculateLastSeenTime(String lastseen) {
         long lastSeenTime = Long.valueOf(lastseen);
         long dif = lastSeenTime - System.currentTimeMillis();
-        return String.valueOf(TimeUnit.MILLISECONDS.toDays(dif)) + " days and " + TimeUnit.MILLISECONDS.toHours(dif)%24 + " hours";
+        return Math.abs(TimeUnit.MILLISECONDS.toDays(dif)) + " days and " + Math.abs(TimeUnit.MILLISECONDS.toHours(dif))%24 + " hours";
     }
 
     @Override
