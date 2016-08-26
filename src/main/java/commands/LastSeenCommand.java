@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBotShutdownEvent, IOnJoinEvent, IOnLeaveEvent {
+public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBotShutdownEvent, IOnJoinEvent {
     private static final String SAVE_PATH = "data/lastseen.data";
     private static HashMap<String, HashMap<String, String>> lastseenInfoMap;
     private static LastSeenCommand instance;
@@ -96,12 +96,5 @@ public class LastSeenCommand implements ICommand, IOnBotInitializedEvent, IOnBot
         info.put("username", nickname);
         info.put("lastseen", String.valueOf(System.currentTimeMillis()));
         lastseenInfoMap.put(UID, info);
-    }
-
-    @Override
-    public void onLeave(TS3Api api, ClientLeaveEvent leaveEvent) {
-        String nickname = leaveEvent.get(ClientProperty.CLIENT_NICKNAME).toLowerCase();
-        String UID = leaveEvent.get(ClientProperty.CLIENT_UNIQUE_IDENTIFIER);
-        updateLastSeenForUID(nickname, UID);
     }
 }
