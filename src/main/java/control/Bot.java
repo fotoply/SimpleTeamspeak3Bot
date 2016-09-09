@@ -7,6 +7,7 @@ import com.github.theholywaffle.teamspeak3.api.event.*;
 import commands.*;
 import control.config.BotConfigReader;
 import eventhandlers.BanishmentOnJoin;
+import eventhandlers.MessageAllOnStart;
 import eventhandlers.OldChannelOnJoin;
 import events.*;
 
@@ -89,6 +90,7 @@ public class Bot {
         eventList.add(SettingsHandler.getInstance());
         eventList.add(new BanishmentOnJoin());
         eventList.add(LastSeenCommand.getInstance());
+        eventList.add(new MessageAllOnStart());
     }
 
     private void initCommands() {
