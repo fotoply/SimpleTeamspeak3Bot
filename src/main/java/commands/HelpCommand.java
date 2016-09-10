@@ -3,13 +3,14 @@ package commands;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import control.Bot;
+import control.UserPowerHandler;
 
 public class HelpCommand implements ICommand {
     @Override
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
         if (args.length == 1) {
             Bot.getCommandMap().forEach((key, command) -> {
-                if (!command.getCommand().equalsIgnoreCase("")) {
+                if (!command.getCommand().equalsIgnoreCase("") && UserPowerHandler.getInstance().canExecuteCommand(command, event.getInvokerUniqueId())) {
                     api.sendPrivateMessage(event.getInvokerId(), String.format("%-12s - %s", command.getCommand(), command.getHelpText()));
                 }
             });
