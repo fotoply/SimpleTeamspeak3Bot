@@ -10,19 +10,33 @@ public class HelpCommand implements ICommand {
     public void run(TS3Api api, String[] args, TextMessageEvent event) {
         if (args.length == 1) {
             Bot.getCommandMap().forEach((key, command) -> {
-                if (!command.getCommand().equalsIgnoreCase("") && UserPowerHandler.getInstance().canExecuteCommand(command, event.getInvokerUniqueId())) {
+                String UID = event.getInvokerUniqueId();
+                if (isValidCommand(command) && canExecuteCommand(command, UID)) {
                     api.sendPrivateMessage(event.getInvokerId(), String.format("%-12s - %s", command.getCommand(), command.getHelpText()));
                 }
             });
             api.sendPrivateMessage(event.getInvokerId(), "Use !help <command> to get more help for that specific command");
         } else {
             Bot.getCommandMap().forEach((key, command) -> {
-                if ((command.getCommand().equalsIgnoreCase(args[1]) || command.getCommand().substring(1).equalsIgnoreCase(args[1])) && !command.getCommand().equals("")) {
+                if (isExistingCommand(args[1], command)) {
                     int clientId = event.getInvokerId();
                     api.sendPrivateMessage(clientId, command.getExtendedHelpText());
                 }
             });
         }
+    }
+
+    private boolean isExistingCommand(String commandText, ICommand command) {
+        return isValidCommand(command) &&
+               command.getCommand().equalsIgnoreCase(commandText) || command.getCommand().substring(1).equalsIgnoreCase(commandText);
+    }
+
+    private boolean isValidCommand(ICommand command) {
+        return !command.getCommand().equalsIgnoreCase("");
+    }
+
+    private boolean canExecuteCommand(ICommand command, String UID) {
+        return UserPowerHandler.getInstance().canExecuteCommand(command, UID);
     }
 
     @Override
